@@ -1,7 +1,7 @@
 package com.app.compose.di
 
 import android.content.Context
-import com.app.compose.ui.BaseApplication
+import com.app.compose.presentation.BaseApplication
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
