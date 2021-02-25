@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ConstraintLayout
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
@@ -15,17 +17,26 @@ import androidx.compose.material.icons.filled.AccountBalanceWallet
 import androidx.compose.material.icons.filled.BrokenImage
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import com.app.compose.presentation.BaseApplication
+import com.app.compose.presentation.components.DefaultSnackbar
 import com.app.compose.presentation.components.RecipeCard
 import com.app.compose.presentation.components.SearchToolbar
 import com.app.compose.presentation.components.shimmer.ShimmerLoading
+import com.app.compose.presentation.components.util.SnackbarController
 import com.app.compose.presentation.theme.AppTheme
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -34,7 +45,9 @@ class RecipeListFragment: Fragment() {
     @Inject
     lateinit var application: BaseApplication
     private val viewModel: RecipeListViewModel by activityViewModels()
+    private val snackbarController = SnackbarController(lifecycleScope)
 
+    @ExperimentalMaterialApi
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -50,7 +63,9 @@ class RecipeListFragment: Fragment() {
                     val selectedCategory = viewModel.selectedCategory.value
                     val categoryScrollPosition = viewModel.categoryScrollPosition
                     val loading = viewModel.loading.value
+                    val scaffoldState = rememberScaffoldState()
                     Scaffold(
+                        scaffoldState = scaffoldState,
                         topBar = {
                             SearchToolbar(
                                 query = query,
@@ -61,9 +76,24 @@ class RecipeListFragment: Fragment() {
                                     viewModel.onSelectedCategoryChanged(category)
                                     viewModel.onChangeCategoryScrollPosition(scrollPosition)
                                 },
-                                onExecuteSearch = { viewModel.newSearch() },
+                                onExecuteSearch = {
+                                    if(viewModel.selectedCategory.value?.value == "Milk") {
+                                        snackbarController.getScope().launch {
+                                            snackbarController.showSnackbar(
+                                                scaffoldState = scaffoldState,
+                                                message = "Invalid category: MILK",
+                                                actionLabel = "Hide"
+                                            )
+                                        }
+                                    } else {
+                                        viewModel.newSearch()
+                                    }
+                                },
                                 onToggleTheme = { application.toggleLightTheme() }
                             )
+                        },
+                        snackbarHost = {
+                            scaffoldState.snackbarHostState
                         }
                     ) {
                         Box(
@@ -82,42 +112,15 @@ class RecipeListFragment: Fragment() {
                                     }
                                 }
                             }
+                            DefaultSnackbar(
+                                snackbarHostState = scaffoldState.snackbarHostState,
+                                onDismiss = { /*TODO*/ },
+                                modifier = Modifier.align(Alignment.BottomCenter)
+                            )
                         }
                     }
                 }
             }
        }
-    }
-}
-
-@Composable
-fun BottomBar() {
-    BottomNavigation(elevation = 12.dp) {
-        BottomNavigationItem(
-            icon = { Icon(Icons.Default.BrokenImage)},
-            selected = false,
-            onClick = {}
-        )
-        BottomNavigationItem(
-            icon = { Icon(Icons.Default.Search)},
-            selected = true,
-            onClick = {}
-        )
-        BottomNavigationItem(
-            icon = { Icon(Icons.Default.AccountBalanceWallet)},
-            selected = false,
-            onClick = {}
-        )
-    }
-}
-
-@Composable
-fun Drawer() {
-    Column {
-        Text("Item1")
-        Text("Item2")
-        Text("Item3")
-        Text("Item4")
-        Text("Item5")
     }
 }
