@@ -46,32 +46,18 @@ class RecipeListFragment: Fragment() {
                         },
                         onExecuteSearch = { viewModel.newSearch() },
                     )
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(200.dp),
-                        horizontalArrangement = Arrangement.Center
+                    Box(
+                        modifier = Modifier.fillMaxSize()
                     ) {
-                        val state = remember { mutableStateOf(IDLE) }
-                        AnimatedHeartButton(
-                            modifier = Modifier,
-                            buttonState = state,
-                            onToggle = {
-                                state.value = it
-                            })
-                    }
-//                    Box(
-//                        modifier = Modifier.fillMaxSize()
-//                    ) {
 //                        CircularIndeterminateProgressBar(isDisplayed = viewModel.loading.value)
-//                        LazyColumn {
-//                            itemsIndexed(
-//                                items = recipes
-//                            ) { index, recipe: Recipe ->
-//                                RecipeCard(recipe = recipe, onClick = { /*TODO*/ })
-//                            }
-//                        }
-//                    }
+                        LazyColumn {
+                            itemsIndexed(
+                                items = recipes
+                            ) { index, recipe: Recipe ->
+                                RecipeCard(recipe = recipe, onClick = { /*TODO*/ })
+                            }
+                        }
+                    }
 
                 }
 
