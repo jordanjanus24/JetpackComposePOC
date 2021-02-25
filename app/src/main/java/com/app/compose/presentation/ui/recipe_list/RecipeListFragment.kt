@@ -4,12 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.app.compose.domain.model.Recipe
+import com.app.compose.presentation.components.CircularIndeterminateProgressBar
 import com.app.compose.presentation.components.RecipeCard
 import com.app.compose.presentation.components.SearchToolbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,13 +46,19 @@ class RecipeListFragment: Fragment() {
                         },
                         onExecuteSearch = { viewModel.newSearch() },
                     )
-                    LazyColumn {
-                        itemsIndexed(
-                            items = recipes
-                        ) { index, recipe: Recipe ->
-                            RecipeCard(recipe = recipe, onClick = { /*TODO*/ })
+                    Box(
+                        modifier = Modifier.fillMaxSize()
+                    ) {
+                        CircularIndeterminateProgressBar(isDisplayed = viewModel.loading.value)
+                        LazyColumn {
+                            itemsIndexed(
+                                items = recipes
+                            ) { index, recipe: Recipe ->
+                                RecipeCard(recipe = recipe, onClick = { /*TODO*/ })
+                            }
                         }
                     }
+
                 }
 
             }

@@ -28,8 +28,8 @@ fun SearchToolbar(
     selectedCategory: FoodCategory?,
     categoryScrollPosition: Float,
     onSelectedCategoryChanged: (String, Float) -> Unit,
-    onExecuteSearch: () -> Unit)
-{
+    onExecuteSearch: () -> Unit
+) {
     Surface (
         modifier = Modifier.fillMaxWidth(),
         color = Color.White,
