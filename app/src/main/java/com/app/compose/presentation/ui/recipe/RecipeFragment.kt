@@ -13,24 +13,34 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
+import com.app.compose.presentation.BaseApplication
+import com.app.compose.presentation.theme.AppTheme
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class RecipeFragment: Fragment() {
+
+    @Inject
+    lateinit var application: BaseApplication
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         return ComposeView(requireContext()).apply {
             setContent {
-                Column(modifier = Modifier.padding(16.dp)) {
-                    Text(
-                        text = "Recipe Fragment",
-                        style = TextStyle(
-                            fontSize = TextUnit.Sp(21)
+                AppTheme(
+                    darkTheme = application.isDark.value
+                ) {
+                    Column(modifier = Modifier.padding(16.dp)) {
+                        Text(
+                            text = "Recipe Fragment",
+                            style = TextStyle(
+                                fontSize = TextUnit.Sp(21)
+                            )
                         )
-                    )
+                    }
                 }
             }
         }
