@@ -55,7 +55,8 @@ class RecipeFragment: Fragment() {
                 val recipe = viewModel.recipe.value
                 val scaffoldState = rememberScaffoldState()
                 AppTheme(
-                    darkTheme = application.isDark.value
+                    darkTheme = application.isDark.value,
+                    scaffoldState = scaffoldState
                 ) {
                     Scaffold(
                         scaffoldState = scaffoldState,
@@ -79,13 +80,7 @@ class RecipeFragment: Fragment() {
                                     }
                                 }
                             }
-                            DefaultSnackbar(
-                                snackbarHostState = scaffoldState.snackbarHostState,
-                                onDismiss = {
-                                    scaffoldState.snackbarHostState.currentSnackbarData?.dismiss()
-                                },
-                                modifier = Modifier.align(Alignment.BottomCenter)
-                            )
+
                         }
                     }
                 }

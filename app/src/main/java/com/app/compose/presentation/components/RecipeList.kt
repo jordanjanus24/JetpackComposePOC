@@ -67,10 +67,5 @@ fun RecipeList(
                 }
             }
         }
-        DefaultSnackbar(
-            snackbarHostState = scaffoldState.snackbarHostState,
-            onDismiss = { scaffoldState.snackbarHostState.currentSnackbarData?.dismiss() },
-            modifier = Modifier.align(Alignment.BottomCenter)
-        )
     }
 }
