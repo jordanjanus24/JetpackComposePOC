@@ -19,8 +19,4 @@ object AppModule {
         return app as BaseApplication
     }
 
-    @Singleton
-    @Provides
-    fun provideRandom() = "Random String"
-
 }

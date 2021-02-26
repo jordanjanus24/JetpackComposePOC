@@ -14,7 +14,9 @@ import com.app.compose.presentation.components.shimmer.ShimmerAnimationDefinitio
 @Composable
 fun ShimmerLoading(
     imageHeight: Dp,
-    padding: Dp = 16.dp
+    padding: Dp = 16.dp,
+    shimmerCount: Int = 5,
+    underlines: Int = 1
 ) {
     WithConstraints {
         val cardWidthPx = with(AmbientDensity.current) {
@@ -44,14 +46,15 @@ fun ShimmerLoading(
         val yCardShimmer =
             cardShimmerTranslateAnim[cardAnimationDefinition.yShimmerPropKey]
         ScrollableColumn{
-            repeat(5) {
+            repeat(shimmerCount) {
                 ShimmerRecipeCardItem(
                     colors = colors,
                     cardHeight = 250.dp,
                     xShimmer = xCardShimmer,
                     yShimmer = yCardShimmer,
                     padding = padding,
-                    gradientWidth = cardAnimationDefinition.gradientWidth
+                    gradientWidth = cardAnimationDefinition.gradientWidth,
+                    underlines = underlines
                 )
             }
         }

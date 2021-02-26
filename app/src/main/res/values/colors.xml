@@ -14,5 +14,5 @@
 
     <color name="red_dark">#B00020</color>
     <color name="red_light">#EF5350</color>
-    <color name="dark_surface">#FF222222</color>
+    <color name="dark_surface">#222222</color>
 </resources>
