@@ -16,17 +16,17 @@ import androidx.compose.ui.unit.dp
 fun BottomBar() {
     BottomNavigation(elevation = 12.dp) {
         BottomNavigationItem(
-            icon = { Icon(Icons.Default.BrokenImage) },
+            icon = { Icon(Icons.Default.BrokenImage,contentDescription = "") },
             selected = false,
             onClick = {}
         )
         BottomNavigationItem(
-            icon = { Icon(Icons.Default.Search) },
+            icon = { Icon(Icons.Default.Search,contentDescription = "") },
             selected = true,
             onClick = {}
         )
         BottomNavigationItem(
-            icon = { Icon(Icons.Default.AccountBalanceWallet) },
+            icon = { Icon(Icons.Default.AccountBalanceWallet,contentDescription = "") },
             selected = false,
             onClick = {}
         )

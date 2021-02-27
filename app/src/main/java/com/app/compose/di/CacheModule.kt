@@ -2,19 +2,18 @@ package com.app.compose.di
 
 import android.content.Context
 import androidx.room.Room
-import com.app.compose.network.model.RecipeDTOMapper
 import com.app.compose.persistence.AppDatabase
 import com.app.compose.persistence.dao.RecipeDao
 import com.app.compose.persistence.model.mapper.RecipeEntityMapper
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
-@InstallIn(ApplicationComponent::class)
+@InstallIn(SingletonComponent::class)
 object CacheModule {
 
     @Singleton

@@ -2,6 +2,9 @@ package com.app.compose.presentation.components
 
 import androidx.compose.foundation.ScrollableRow
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
@@ -22,9 +25,9 @@ import com.app.compose.presentation.ui.recipe_list.getAllFoodCategories
 fun SearchToolbar(
     query: String,
     onQueryChanged: (String) -> Unit,
+    categories: List<FoodCategory>,
     selectedCategory: FoodCategory?,
-    categoryScrollPosition: Float,
-    onSelectedCategoryChanged: (String, Float) -> Unit,
+    onSelectedCategoryChanged: (String) -> Unit,
     onExecuteSearch: () -> Unit,
     onToggleTheme: () -> Unit
 ) {
@@ -50,7 +53,7 @@ fun SearchToolbar(
                         imeAction = ImeAction.Done,
                     ),
                     leadingIcon = {
-                        Icon(Icons.Filled.Search)
+                        Icon(Icons.Filled.Search, contentDescription = "Search Icon")
                     },
                     onImeActionPerformed = { action, softKeyboardController ->
                         if (action == ImeAction.Done) {
@@ -69,22 +72,21 @@ fun SearchToolbar(
                             top.linkTo(parent.top)
                             bottom.linkTo(parent.bottom)
                         }) {
-                        Icon(Icons.Filled.MoreVert)
+                        Icon(Icons.Filled.MoreVert, contentDescription = "Toggle Dark/Light Theme")
                     }
                 }
             }
-            val scrollState = rememberScrollState()
-            ScrollableRow (
+            val scrollState = rememberLazyListState()
+            LazyRow (
                 modifier = Modifier.fillMaxWidth()
                     .padding(8.dp),
-                scrollState = scrollState
+                state = scrollState
             ) {
-                scrollState.scrollTo(categoryScrollPosition)
-                for(category in getAllFoodCategories()) {
+                items(categories) { category ->
                     FoodCategoryChip(
                         category = category.value,
                         isSelected = selectedCategory === category,
-                        onSelectedCategoryChanged = { onSelectedCategoryChanged(it,scrollState.value) },
+                        onSelectedCategoryChanged = { onSelectedCategoryChanged(it) },
                         onExecuteSearch = onExecuteSearch
                     )
                 }

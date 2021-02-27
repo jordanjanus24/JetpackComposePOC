@@ -6,7 +6,8 @@ import androidx.room.ForeignKey.CASCADE
 @Entity(foreignKeys = [ForeignKey(entity = RecipeEntity::class,
         parentColumns = ["recipe_id"],
     childColumns = ["recipe_ingredient_id"],
-    onDelete = CASCADE)])
+    onDelete = CASCADE)],
+indices = [Index("recipe_ingredient_id",unique = false)])
 data class Ingredient(
     @PrimaryKey  @ColumnInfo(name = "id")
     val id: Int? = null,

@@ -20,7 +20,7 @@ fun CircularIndeterminateProgressBar(
     isDisplayed: Boolean
 ) {
     if(isDisplayed) {
-        WithConstraints(
+        BoxWithConstraints(
             modifier = Modifier.fillMaxSize()
         ) {
             val constraints = if (minWidth < 600.dp) {

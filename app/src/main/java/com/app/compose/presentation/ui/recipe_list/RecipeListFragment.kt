@@ -61,7 +61,6 @@ class RecipeListFragment: Fragment() {
                 val recipes = viewModel.recipes.value
                 val query = viewModel.query.value
                 val selectedCategory = viewModel.selectedCategory.value
-                val categoryScrollPosition = viewModel.categoryScrollPosition
                 val loading = viewModel.loading.value
                 val page = viewModel.page.value
                 val scaffoldState = rememberScaffoldState()
@@ -76,10 +75,9 @@ class RecipeListFragment: Fragment() {
                                 query = query,
                                 onQueryChanged = { viewModel.onQueryChanged(it) },
                                 selectedCategory = selectedCategory,
-                                categoryScrollPosition = categoryScrollPosition,
-                                onSelectedCategoryChanged = { category, scrollPosition ->
+                                categories = getAllFoodCategories(),
+                                onSelectedCategoryChanged = { category ->
                                     viewModel.onSelectedCategoryChanged(category)
-                                    viewModel.onChangeCategoryScrollPosition(scrollPosition)
                                 },
                                 onExecuteSearch = {
                                     if(viewModel.selectedCategory.value?.value == "Milk") {

@@ -13,8 +13,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.unit.dp
-import androidx.ui.tooling.preview.Preview
-import com.app.compose.presentation.components.PulseAnimationDefinitions.PulseState.*
+import com.app.compose.presentation.components.PulseAnimationDefinitions.PulseState.FINAL
+import com.app.compose.presentation.components.PulseAnimationDefinitions.PulseState.INITIAL
 import com.app.compose.presentation.components.PulseAnimationDefinitions.pulseDefinition
 import com.app.compose.presentation.components.PulseAnimationDefinitions.pulsePropKey
 
@@ -42,7 +42,8 @@ fun PulsingDemo(){
                 .height(pulseMagnitude.dp)
                 .width(pulseMagnitude.dp)
             ,
-            imageVector = Icons.Default.Favorite.copy(),
+            imageVector = Icons.Default.Favorite,
+            contentDescription = "Favorite"
         )
     }
 

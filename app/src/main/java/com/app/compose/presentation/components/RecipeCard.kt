@@ -1,5 +1,6 @@
 package com.app.compose.presentation.components
 
+import android.text.Html
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -17,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import com.app.compose.R
 import com.app.compose.domain.model.Recipe
 import com.app.compose.utils.DEFAULT_RECIPE_IMAGE
+import com.app.compose.utils.fromHtml
 import com.app.compose.utils.loadPicture
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -31,8 +33,7 @@ fun RecipeCard(
             .padding(6.dp)
             .fillMaxWidth()
             .clickable(
-                onClick = onClick,
-                indication = rememberRipple(bounded = true)),
+                onClick = onClick),
         elevation = 8.dp
     ) {
         Column {
@@ -44,7 +45,8 @@ fun RecipeCard(
                         modifier = Modifier
                             .fillMaxWidth()
                             .preferredHeight(225.dp),
-                        contentScale = ContentScale.Crop
+                        contentScale = ContentScale.Crop,
+                        contentDescription = "Recipe Featured Image"
                     )
                 }
 
@@ -55,7 +57,7 @@ fun RecipeCard(
                         .padding(top=12.dp, bottom = 12.dp, start = 8.dp, end = 8.dp)
                 ) {
                     Text(
-                        text = title,
+                        text = fromHtml(title),
                         modifier = Modifier.fillMaxWidth(0.85f)
                             .wrapContentWidth(Alignment.Start),
                         style = MaterialTheme.typography.h4

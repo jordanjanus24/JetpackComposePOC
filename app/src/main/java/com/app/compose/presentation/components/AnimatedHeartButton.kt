@@ -52,9 +52,10 @@ private fun HeartButton(
         Image(
             bitmap = image.asImageBitmap(),
             modifier = modifier
-                .clickable(onClick = { onToggle(if(buttonState.value === ACTIVE) IDLE else ACTIVE) }, indication = null)
+                .clickable(onClick = { onToggle(if(buttonState.value === ACTIVE) IDLE else ACTIVE) })
                 .width(state[heartSize])
-                .width(state[heartSize])
+                .width(state[heartSize]),
+            contentDescription = "Heart Button"
         )
     }
 }

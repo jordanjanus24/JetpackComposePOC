@@ -1,6 +1,5 @@
 package com.app.compose.presentation.components.shimmer
 
-import android.widget.Space
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme

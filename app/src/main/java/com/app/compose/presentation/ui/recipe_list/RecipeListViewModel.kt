@@ -3,16 +3,16 @@ package com.app.compose.presentation.ui.recipe_list
 import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import androidx.hilt.Assisted
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.app.compose.domain.model.Recipe
 import com.app.compose.presentation.ui.recipe_list.RecipeListEvent.*
 import com.app.compose.repository.RecipeRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 const val PAGE_SIZE = 30
 
@@ -21,11 +21,12 @@ const val STATE_KEY_QUERY = "recipe.state.query.key"
 const val STATE_KEY_LIST_POSITION = "recipe.state.query.list_position"
 const val STATE_KEY_SELECTED_CATEGORY = "recipe.state.query.selected_category"
 
+@HiltViewModel
 class RecipeListViewModel
-@ViewModelInject
+@Inject
 constructor(
     private val repository: RecipeRepository,
-    @Assisted private val savedStateHandle: SavedStateHandle
+     private val savedStateHandle: SavedStateHandle
 ): ViewModel() {
     val recipes: MutableState<List<Recipe>> = mutableStateOf(ArrayList())
     val query = mutableStateOf("")

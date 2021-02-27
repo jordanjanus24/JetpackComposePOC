@@ -4,15 +4,16 @@ import com.app.compose.network.RecipeService
 import com.app.compose.network.model.RecipeDTOMapper
 import com.app.compose.persistence.dao.RecipeDao
 import com.app.compose.persistence.model.mapper.RecipeEntityMapper
-import com.app.compose.repository.*
+import com.app.compose.repository.RecipeRepository
+import com.app.compose.repository.RecipeRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
-@InstallIn(ApplicationComponent::class)
+@InstallIn(SingletonComponent::class)
 object RepositoryModule {
 
     @Singleton

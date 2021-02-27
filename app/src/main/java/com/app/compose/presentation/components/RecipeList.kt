@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.ScaffoldState
@@ -41,9 +42,7 @@ fun RecipeList(
         }
         else {
             LazyColumn {
-                itemsIndexed(
-                    items = recipes
-                ) { index, recipe ->
+                itemsIndexed(items = recipes) { index, recipe ->
                     onChangeScrollPosition(index)
                     if((index + 1) >= (page * PAGE_SIZE) && !loading) {
                         onTriggerNextPage()
