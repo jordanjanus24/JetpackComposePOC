@@ -94,6 +94,8 @@ constructor(
         )
         recipes.value = result
         loading.value = false
+
+        Log.d("Recipes", result.toString())
     }
     private suspend fun nextPage() {
         if((recipeListScrollPosition + 1) >= (page.value * PAGE_SIZE) ) {

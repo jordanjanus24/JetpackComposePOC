@@ -2,6 +2,8 @@ package com.app.compose.di
 
 import com.app.compose.network.RecipeService
 import com.app.compose.network.model.RecipeDTOMapper
+import com.app.compose.persistence.dao.RecipeDao
+import com.app.compose.persistence.model.mapper.RecipeEntityMapper
 import com.app.compose.repository.*
 import dagger.Module
 import dagger.Provides
@@ -17,11 +19,15 @@ object RepositoryModule {
     @Provides
     fun provideRecipeRepository(
         recipeService: RecipeService,
-        recipeMapper: RecipeDTOMapper
+        recipeMapper: RecipeDTOMapper,
+        recipeDao: RecipeDao,
+        entityMapper: RecipeEntityMapper
     ): RecipeRepository {
-        return RecipeRepository_Impl(
+        return RecipeRepositoryImpl(
             recipeService = recipeService,
-            mapper = recipeMapper
+            mapper = recipeMapper,
+            recipeDao = recipeDao,
+            entityMapper = entityMapper
         )
     }
 }

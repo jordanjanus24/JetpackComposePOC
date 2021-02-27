@@ -34,7 +34,7 @@ fun SearchToolbar(
         elevation = 8.dp
     ) {
         Column {
-            Row(modifier = Modifier.fillMaxWidth()){
+            Row(modifier = Modifier.fillMaxWidth().padding(top= 35.dp)){
                 TextField(
                     modifier = Modifier
                         .fillMaxWidth(.9f)

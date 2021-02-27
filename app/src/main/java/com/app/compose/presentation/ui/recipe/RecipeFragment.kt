@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
@@ -64,7 +65,7 @@ class RecipeFragment: Fragment() {
                             scaffoldState.snackbarHostState
                         }
                     ) {
-                        Box(modifier = Modifier.fillMaxSize()) {
+                        Box(modifier = Modifier.fillMaxSize().padding(top = 35.dp)) {
                             if(loading && recipe == null) {
                                 ShimmerLoading(imageHeight = IMAGE_HEIGHT.dp,shimmerCount = 1, underlines = 3)
                             } else {
@@ -80,7 +81,6 @@ class RecipeFragment: Fragment() {
                                     }
                                 }
                             }
-
                         }
                     }
                 }

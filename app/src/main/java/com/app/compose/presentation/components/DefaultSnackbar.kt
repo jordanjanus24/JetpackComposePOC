@@ -29,7 +29,7 @@ fun DefaultSnackbar(
                 },
                 action = {
                     data.actionLabel?.let { actionLabel ->
-                        TextButton(onClick = { /*TODO*/ }) {
+                        TextButton(onClick = { onDismiss() }) {
                             Text(
                                 text = actionLabel,
                                 style = MaterialTheme.typography.body2,
