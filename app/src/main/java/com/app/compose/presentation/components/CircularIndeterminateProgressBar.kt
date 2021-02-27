@@ -1,20 +1,18 @@
 package com.app.compose.presentation.components
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.ConstraintLayout
+import androidx.compose.foundation.layout.ConstraintSet
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.FocusRequester.Companion.createRefs
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.WithConstraints
-import androidx.compose.ui.layout.layout
 import androidx.compose.ui.layout.layoutId
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 
+
+@Suppress("Deprecation")
 @Composable
 fun CircularIndeterminateProgressBar(
     isDisplayed: Boolean
@@ -40,6 +38,8 @@ fun CircularIndeterminateProgressBar(
         }
     }
 }
+
+@Suppress("Deprecation")
 private fun myDecoupledConstraints(verticalBias: Float): ConstraintSet {
     return ConstraintSet {
         val guideline = createGuidelineFromTop(verticalBias)
