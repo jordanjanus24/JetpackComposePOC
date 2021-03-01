@@ -25,7 +25,7 @@ fun DefaultSnackbar(
                             Text(
                                 text = actionLabel,
                                 style = MaterialTheme.typography.body2,
-                                color = MaterialTheme.colors.secondary
+                                color = MaterialTheme.colors.onBackground
                             )
                         }
                     }

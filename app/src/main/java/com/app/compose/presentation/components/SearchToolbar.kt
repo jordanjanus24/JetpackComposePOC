@@ -1,5 +1,9 @@
 package com.app.compose.presentation.components
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.animateContentSize
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -11,16 +15,23 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.app.compose.R
 import com.app.compose.presentation.ui.recipe_list.FoodCategory
+import com.app.compose.presentation.util.ConnectionLiveData
 
 
 @Suppress("Deprecation")
+@ExperimentalAnimationApi
 @Composable
 fun SearchToolbar(
     query: String,
@@ -29,15 +40,29 @@ fun SearchToolbar(
     selectedCategory: FoodCategory?,
     onSelectedCategoryChanged: (String) -> Unit,
     onExecuteSearch: () -> Unit,
-    onToggleTheme: () -> Unit
+    onToggleTheme: () -> Unit,
+    connectionLiveData: ConnectionLiveData
 ) {
+    val isNetworkAvailable = connectionLiveData.observeAsState(false).value
     Surface (
         modifier = Modifier.fillMaxWidth(),
         color = MaterialTheme.colors.surface,
         elevation = 8.dp
     ) {
         Column {
-            Row(modifier = Modifier.fillMaxWidth().padding(top= 30.dp)){
+            AnimatedVisibility(visible = !isNetworkAvailable) {
+                Text(modifier = Modifier
+                    .fillMaxWidth()
+                    .background(MaterialTheme.colors.error)
+                    .padding(top = 40.dp, bottom = 8.dp),
+                    textAlign = TextAlign.Center,
+                    style = TextStyle(fontWeight = FontWeight.Bold, color = MaterialTheme.colors.onError),
+                    text = stringResource(id = R.string.no_internet_connection))
+            }
+            Row(modifier = Modifier
+                .fillMaxWidth()
+                .animateContentSize()
+                .padding(top = if (isNetworkAvailable) 30.dp else 0.dp)){
                 TextField(
                     modifier = Modifier
                         .fillMaxWidth(.9f)
@@ -77,7 +102,8 @@ fun SearchToolbar(
             }
             val scrollState = rememberLazyListState()
             LazyRow (
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
                     .padding(8.dp),
                 state = scrollState
             ) {

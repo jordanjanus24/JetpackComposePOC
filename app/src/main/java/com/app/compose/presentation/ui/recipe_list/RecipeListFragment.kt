@@ -19,6 +19,7 @@ import com.app.compose.presentation.components.util.SnackbarController
 import com.app.compose.presentation.theme.AppTheme
 import com.app.compose.presentation.ui.recipe_list.RecipeListEvent.NewSearchEvent
 import com.app.compose.presentation.ui.recipe_list.RecipeListEvent.NextPageEvent
+import com.app.compose.presentation.util.ConnectionLiveData
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -30,6 +31,9 @@ class RecipeListFragment: Fragment() {
     lateinit var application: BaseApplication
     private val viewModel: RecipeListViewModel by activityViewModels()
     private val snackbarController = SnackbarController(lifecycleScope)
+
+    @Inject
+    lateinit var connectionLiveData: ConnectionLiveData
 
     @ExperimentalMaterialApi
     override fun onCreateView(
@@ -73,7 +77,8 @@ class RecipeListFragment: Fragment() {
                                         viewModel.onTriggerEvent(NewSearchEvent)
                                     }
                                 },
-                                onToggleTheme = { application.toggleLightTheme() }
+                                onToggleTheme = { application.toggleLightTheme() },
+                                connectionLiveData = connectionLiveData
                             )
                         },
                         snackbarHost = {

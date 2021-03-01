@@ -3,13 +3,17 @@ package com.app.compose.presentation.theme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.app.compose.R
 import com.app.compose.presentation.components.DefaultSnackbar
 
 private val LightThemeColors = lightColors(
@@ -20,7 +24,7 @@ private val LightThemeColors = lightColors(
     secondaryVariant = Teal300,
     onSecondary = Color.Black,
     error = RedErrorDark,
-    onError = RedErrorLight,
+    onError = Color.Black,
     background = Grey1,
     onBackground = Color.Black,
     surface = Color.White,
@@ -34,6 +38,7 @@ private val DarkThemeColors = darkColors(
     secondary = Black1,
     onSecondary = Color.White,
     error = RedErrorLight,
+    onError = Color.White,
     background = Color.Black,
     onBackground = Color.White,
     surface = Black1,
@@ -53,6 +58,7 @@ fun AppTheme(
     ){
         Box(modifier = Modifier.fillMaxSize().padding(bottom = 45.dp)
             .background(color = if(!darkTheme) Grey1 else Color.Black)) {
+
             content()
             DefaultSnackbar(
                 snackbarHostState = scaffoldState.snackbarHostState,

@@ -1,10 +1,13 @@
 package com.app.compose.di
+import android.content.Context
 import com.app.compose.network.RecipeService
 import com.app.compose.network.model.RecipeDTOMapper
+import com.app.compose.presentation.util.ConnectionLiveData
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -29,5 +32,9 @@ object NetworkModule {
             .build()
             .create(RecipeService::class.java)
     }
+
+    @Singleton
+    @Provides
+    fun provideConnectionLiveData(@ApplicationContext app: Context) = ConnectionLiveData(app)
 
 }
