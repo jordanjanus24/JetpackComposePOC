@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -35,6 +37,8 @@ class RecipeListFragment: Fragment() {
     @Inject
     lateinit var connectionLiveData: ConnectionLiveData
 
+    @ExperimentalComposeUiApi
+    @ExperimentalAnimationApi
     @ExperimentalMaterialApi
     override fun onCreateView(
         inflater: LayoutInflater,

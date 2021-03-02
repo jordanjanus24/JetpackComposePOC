@@ -31,7 +31,7 @@ fun ShimmerRecipeCardItem(
         Surface(shape = MaterialTheme.shapes.small) {
             Spacer(
                 modifier = Modifier.fillMaxWidth()
-                    .preferredHeight(cardHeight)
+                    .requiredHeight(cardHeight)
                     .background(brush = brush)
             )
         }
@@ -40,7 +40,7 @@ fun ShimmerRecipeCardItem(
             Surface(shape = MaterialTheme.shapes.small) {
                 Spacer(
                     modifier = Modifier.fillMaxWidth()
-                        .preferredHeight(cardHeight / 10)
+                        .requiredHeight(cardHeight / 10)
                         .background(brush = brush)
                 )
             }

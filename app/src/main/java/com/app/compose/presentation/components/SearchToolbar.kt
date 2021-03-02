@@ -17,7 +17,10 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -25,11 +28,13 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.compose.ConstraintLayout
 import com.app.compose.R
 import com.app.compose.presentation.ui.recipe_list.FoodCategory
 import com.app.compose.presentation.util.ConnectionLiveData
 
 
+@ExperimentalComposeUiApi
 @Suppress("Deprecation")
 @ExperimentalAnimationApi
 @Composable
@@ -44,6 +49,7 @@ fun SearchToolbar(
     connectionLiveData: ConnectionLiveData
 ) {
     val isNetworkAvailable = connectionLiveData.observeAsState(false).value
+    val keyboardController = LocalSoftwareKeyboardController.current
     Surface (
         modifier = Modifier.fillMaxWidth(),
         color = MaterialTheme.colors.surface,
@@ -83,10 +89,11 @@ fun SearchToolbar(
                     keyboardActions = KeyboardActions(
                         onDone = {
                             onExecuteSearch()
+                            keyboardController?.hideSoftwareKeyboard()
                         }
                     ),
                     textStyle = TextStyle(color = MaterialTheme.colors.onSurface),
-                    backgroundColor = MaterialTheme.colors.surface
+                    colors = TextFieldDefaults.textFieldColors(backgroundColor = MaterialTheme.colors.surface)
                 )
                 ConstraintLayout(modifier = Modifier.align(Alignment.CenterVertically)) {
                     val menu = createRef()

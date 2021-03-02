@@ -26,7 +26,7 @@ fun RecipeView(recipe: Recipe) {
                     Image(
                         bitmap = img.asImageBitmap(),
                         modifier = Modifier.fillMaxWidth()
-                            .preferredHeight(IMAGE_HEIGHT.dp),
+                            .requiredHeight(IMAGE_HEIGHT.dp),
                         contentScale = ContentScale.Crop,
                         contentDescription = "Recipe"
                     )

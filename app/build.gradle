@@ -1,18 +1,18 @@
 plugins {
-    id 'com.android.application'
-    id 'kotlin-android'
-    id 'kotlin-kapt'
-    id 'dagger.hilt.android.plugin'
+    id "com.android.application"
+    id "kotlin-android"
+    id "kotlin-kapt"
+    id "dagger.hilt.android.plugin"
 }
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.3"
+    compileSdkVersion AndroidBuild.compileSdk
+    buildToolsVersion AndroidBuild.toolsVersion
 
     defaultConfig {
         applicationId "com.app.compose"
-        minSdkVersion 21
-        targetSdkVersion 30
+        minSdkVersion AndroidBuild.minSdk
+        targetSdkVersion AndroidBuild.targetSdk
         versionCode 1
         versionName "1.0"
 
@@ -30,11 +30,8 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     composeOptions {
-        def kotlin_compiler_version = "1.4.30"
-        kotlinCompilerVersion kotlin_compiler_version
-
-        def kotlin_compiler_extension_version = "1.0.0-alpha12"
-        kotlinCompilerExtensionVersion kotlin_compiler_extension_version
+        kotlinCompilerVersion ComposeOptions.kotlin_compiler
+        kotlinCompilerExtensionVersion ComposeOptions.kotlin_compiler_extension
     }
     buildFeatures {
         compose true
@@ -46,58 +43,50 @@ android {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.3.2'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.0'
+    implementation Deps.kotlin_std_lib
 
-    def app_compat = "1.3.0-beta01"
-    implementation "androidx.appcompat:appcompat:$app_compat"
-    def fragment = "1.3.0"
-    implementation "androidx.fragment:fragment-ktx:$fragment"
+    implementation Deps.androidx_core_ktx
+    implementation Deps.androidx_lifecycle
+    implementation Deps.androidx_appcompat
+    implementation Deps.androidx_fragment
+    implementation Deps.androidx_constraintlayout
 
-    def material = "1.3.0"
-    implementation "com.google.android.material:material:$material"
+    implementation Deps.material
 
-    def constraint_layout = "2.0.4"
-    implementation "androidx.constraintlayout:constraintlayout:$constraint_layout"
+    implementation Deps.compose_ui_tooling
 
-    def androidx_ui = "1.0.0-alpha07"
-    implementation "androidx.ui:ui-tooling:$androidx_ui"
+    implementation Deps.compose_ui
+    implementation Deps.compose_foundation
+    implementation Deps.compose_livedata
+    implementation Deps.compose_rxjava2
+    implementation Deps.compose_material
+    implementation Deps.compose_material_icons
+    implementation Deps.compose_material_icons_extended
+    implementation Deps.compose_animation
+    implementation Deps.compose_constraint
+    implementation Deps.compose_activity
 
-    def compose = "1.0.0-alpha12"
-    implementation "androidx.compose.ui:ui:$compose"
-    implementation "androidx.compose.foundation:foundation:$compose"
-    implementation "androidx.compose.runtime:runtime-livedata:$compose"
-    implementation "androidx.compose.runtime:runtime-rxjava2:$compose"
-    implementation "androidx.compose.material:material:$compose"
-    implementation "androidx.compose.material:material-icons-core:$compose"
-    implementation "androidx.compose.material:material-icons-extended:$compose"
-    implementation "androidx.compose.animation:animation:$compose"
+    implementation Deps.navigation_fragment_ktx
+    implementation Deps.navigation_ui_ktx
 
-    def nav_version = "2.3.3"
-    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
-    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+    implementation Deps.retrofit
+    implementation Deps.retrofit_converter_gson
 
-    def retrofit = "2.9.0"
-    implementation "com.squareup.retrofit2:retrofit:$retrofit"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
 
-    implementation "com.google.dagger:hilt-android:$hilt_version"
-    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
-    def hilt_lifecycle = '1.0.0-alpha03'
-    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_lifecycle"
-    kapt "androidx.hilt:hilt-compiler:$hilt_lifecycle"
+    implementation Deps.hilt_android
+    kapt Deps.hilt_android_compiler
+    implementation Deps.hilt_lifecycle
+    kapt Deps.hilt_compiler
 
-    def glide = '4.12.0'
-    implementation "com.github.bumptech.glide:glide:$glide"
-    annotationProcessor "com.github.bumptech.glide:compiler:$glide"
-    def room = "2.2.6"
-    implementation "androidx.room:room-runtime:$room"
-    kapt "androidx.room:room-compiler:$room"
-    implementation "androidx.room:room-ktx:$room"
+    implementation Deps.glide
+    kapt Deps.glide_compiler
 
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    implementation Deps.room_runtime
+    kapt Deps.room_compiler
+    implementation Deps.room_ktx
+
+    testImplementation TestDeps.junit
+    androidTestImplementation TestDeps.junit_ext
+    androidTestImplementation TestDeps.espresso
 
 }
