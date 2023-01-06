@@ -1,8 +1,8 @@
 private object Versions {
-    const val gradle = "7.0.0-alpha08"
+    const val gradle = "7.0.0"
     const val kotlin = "1.4.30"
     // Hilt
-    const val hilt = "2.32-alpha"
+    const val hilt = "2.37"
     const val hilt_lifecycle = "1.0.0-alpha03"
     // AndroidX
     const val androidx_core = "1.3.2"
@@ -24,7 +24,7 @@ private object Versions {
     // Glide
     const val glide = "4.12.0"
     // Room
-    const val room = "2.2.6"
+    const val room = "2.4.0-alpha03"
     object Testing {
         const val junit = "4.13"
         const val junit_ext = "1.1.2"
